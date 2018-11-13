@@ -4,8 +4,8 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('js/jquery.min')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'js/jquery.min'], factory) :
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('assets/js/jquery.min')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'assets/js/jquery.min'], factory) :
   (factory((global.bootstrap = {}),global.jQuery));
 }(this, (function (exports,$) { 'use strict';
 

@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>SAY - UI</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/sayui.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/sayui.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/fontawesome/css/all.css">
 </head>
 <body>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Application Name</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">HRIS System</a>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -21,25 +22,111 @@
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
+                <div id="sidebar" style="width:100%;"></div>
             </div>
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Page Name</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <button class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
+                <div class="ml-0">
+                    <ol class="breadcrumb breadcrumb-arrow">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Library</a></li>
+                        <li class="active"><span>Data</span></li>
+                    </ol>
                 </div>
             </div>
-            <div class="my-4 w-100" id="grid" width="900" height="380"></div>
+            <div class="my-3 p-3 bg-white rounded shadow-sm">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Page Description</h6>
+                <div id="page-content"></div>
+            </div>
         </main>
     </div>
 </div>
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/sayui.js"></script>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.slimscroll.min.js"></script>
+<script src="assets/js/sayui.js"></script>
+<script src="assets/js/script.js"></script>
+<script>
+    var windowHeight = $(window).height();
+    var content = $("#page-content");
+    var sidebar = $("#sidebar");
+    $(function(){
+        $.post("data/sidebar.json", function(response){
+            generateSidebar(response);
+        })
+        generateGrid();
+    })
+    function generateSidebar(dataContent){
+        sidebar.css("height", windowHeight - 100);
+        sidebar.saysidebar({
+            name: 'sidebar',
+            nodes: dataContent.nodes,
+            onRefresh: function(event) {
+                event.onComplete = function () {
+                    $('.sayui-sidebar-div').slimScroll({ height: '100%' });
+                }
+            }
+        });
+    }
+    function generateGrid(){
+        $('#page-content').saygrid({
+            name: 'grid',
+            show: {
+                toolbar: true,
+                footer: true,
+                toolbarAdd: true,
+                toolbarDelete: true,
+                toolbarSave: true,
+                toolbarEdit: true
+            },
+            searches: [
+                { field: 'lname', caption: 'Last Name', type: 'text' },
+                { field: 'fname', caption: 'First Name', type: 'text' },
+                { field: 'email', caption: 'Email', type: 'text' }
+            ],
+            columns: [
+                { field: 'recid', caption: 'ID', size: '50px', sortable: true, attr: 'align=center' },
+                { field: 'lname', caption: 'Last Name', size: '30%', sortable: true },
+                { field: 'fname', caption: 'First Name', size: '30%', sortable: true },
+                { field: 'email', caption: 'Email', size: '40%' },
+                { field: 'sdate', caption: 'Start Date', size: '120px' }
+            ],
+            onAdd: function (event) {
+                sayalert('add');
+            },
+            onEdit: function (event) {
+                sayalert('edit');
+            },
+            onDelete: function (event) {
+                console.log('delete has default behavior');
+            },
+            onSave: function (event) {
+                sayalert('save');
+            },
+            records: [
+                { recid: 1, fname: 'Jane', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 2, fname: 'Stuart', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 3, fname: 'Jin', lname: 'Franson', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 4, fname: 'Susan', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 5, fname: 'Kelly', lname: 'Silver', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 6, fname: 'Francis', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 7, fname: 'Mark', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 8, fname: 'Thomas', lname: 'Bahh', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 9, fname: 'Sergei', lname: 'Rachmaninov', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 20, fname: 'Jill', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 21, fname: 'Frank', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 22, fname: 'Peter', lname: 'Franson', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 23, fname: 'Andrew', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 24, fname: 'Manny', lname: 'Silver', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 25, fname: 'Ben', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 26, fname: 'Doer', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 27, fname: 'Shashi', lname: 'Bahh', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 28, fname: 'Av', lname: 'Rachmaninov', email: 'jdoe@gmail.com', sdate: '4/3/2012' }
+            ]
+        });
+    }
+</script>
 </body>
 </html>

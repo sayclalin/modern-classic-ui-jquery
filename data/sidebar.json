@@ -1,0 +1,55 @@
+{
+  "nodes": [
+    {
+      "id": "payroll-system",
+      "text": "Sistem Penggajian",
+      "expanded": true,
+      "group": true,
+      "nodes": [
+        {
+          "id": "administrator",
+          "text": "Administrator",
+          "icon": "fas fa-user-tie",
+          "count": 2,
+          "nodes": [
+            { "id": "user-management", "text": "User Management", "icon": "fas fa-user-lock" },
+            { "id": "employee", "text": "Karyawan", "icon": "fas fa-user-friends" },
+            { "id": "payroll-period", "text": "Periode Penggajian", "icon": "fas fa-stopwatch" },
+            { "id": "fiscal-year", "text": "Tahun Takwin", "icon": "fas fa-stopwatch" },
+            { "id": "activity-log", "text": "Aktifitas Pengguna", "icon": "fas fa-file-archive" },
+            { "id": "graph", "text": "Grafik", "icon": "fas fa-chart-bar" },
+            { "id": "db-connection", "text": "Koneksi Database", "icon": "fas fa-database" },
+            { "id": "settings", "text": "Pengaturan", "icon": "fas fa-cogs" },
+            { "id": "company-calender", "text": "Kalendar Perusahaan", "icon": "fas fa-calendar" },
+            { "id": "employee-benefits", "text": "Klaim Karyawan & Benefit Kesehatan", "icon": "fas fa-user-shield" },
+            { "id": "history-data", "text": "Arsip Data", "icon": "fas fa-history" },
+            { "id": "employee-mutation", "text": "Promosi, Mutasi, & Demosi", "icon": "fas fa-user-clock" },
+            { "id": "approval", "text": "Menunggu Persetujuan", "icon": "fas fa-user-check", "count": 2 },
+            { "id": "employee-termination", "text": "Pemberhentian Karyawan", "icon": "fas fa-user-times" }
+          ]
+        },
+        {
+          "id": "payroll",
+          "text": "Penggajian",
+          "icon": "fas fa-hand-holding-usd",
+          "nodes": [
+            { "id": "master-salary", "text": "Master Gaji", "icon": "fas fa-user-tie" },
+            { "id": "generate-salary", "text": "Proses Penggajian", "icon": "fas fa-list-alt" },
+            { "id": "salary-list", "text": "List Gaji", "icon": "fas fa-user-tag" },
+            { "id": "bank-list", "text": "List Bank", "icon": "fas fa-piggy-bank" },
+            { "id": "employee-debt", "text": "Pinjaman", "icon": "fas fa-user-secret" },
+            { "id": "debt-installments", "text": "Angsuran Pinjaman", "icon": "fas fa-user-clock" }
+          ]
+        },
+        {
+          "id": "tax-insurance",
+          "text": "Pajak & BPJS",
+          "icon": "fas fa-percent",
+          "nodes": [
+            { "id": "pph-21", "text": "PPh 21", "icon": "fas fa-percentage" }
+          ]
+        }
+      ]
+    }
+  ]
+}

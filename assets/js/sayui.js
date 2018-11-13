@@ -1621,12 +1621,6 @@ var sayutils = (function ($) {
 
 })(jQuery);
 
-/***********************************************************
-*  Formatters object
-*  --- Primariy used in grid
-*
-*********************************************************/
-
 sayutils.formatters = {
 
     'number': function (value, params) {
@@ -2876,137 +2870,6 @@ sayutils.event = {
     };
 
 })(jQuery);
-
-/************************************************************************
-*   Library: Web 2.0 UI for jQuery (using prototypical inheritance)
-*   - Following objects defined
-*        - saygrid        - grid widget
-*        - $().saygrid    - jQuery wrapper
-*   - Dependencies: jQuery, sayutils, saytoolbar, sayfields
-*
-* == NICE TO HAVE ==
-*   - column autosize based on largest content
-*   - reorder columns/records
-*   - problem with .set() and arrays, array get extended too, but should be replaced
-*   - after edit stay on the same record option
-*   - if supplied array of ids, get should return array of records
-*   - allow functions in routeData (also add routeData to list/enum)
-*   - implement global routeData and all elements read from there
-*   - send parsed URL to the event if there is routeData
-*   - if you set searchData or sortData and call refresh() it should work
-*   - add selectType: 'none' so that no selection can be make but with mouse
-*   - reorder records with frozen columns
-*   - focus/blur for selectType = cell not display grayed out selection
-*   - frozen columns
-        - load more only on the right side
-        - scrolling on frozen columns is not working only on regular columns
-*   - copy or large number of records is slow
-*   - reusable search component (see https://github.com/vitmalina/sayui/issues/914#issuecomment-107340524)
-*   - allow enum in inline edit (see https://github.com/vitmalina/sayui/issues/911#issuecomment-107341193)
-*   - if record has no recid, then it should be index in the aray (should not be 0)
-*
-* == KNOWN ISSUES ==
-*   - bug: vs_start = 100 and more then 500 records, when scrolling empty sets
-*   - row drag and drop has bugs
-*   - Shift-click/Ctrl-click/Ctrl-Shift-Click selection is not as robust as it should be
-*
-* == 1.5 changes
-*   - $('#grid').saygrid() - if called w/o argument then it returns grid object
-*   - added statusRange     : true,
-*           statusBuffered  : false,
-*           statusRecordID  : true,
-*           statusSelection : true,
-*           statusResponse  : true,
-*           statusSort      : true,
-*           statusSearch    : true,
-*   - change selectAll() and selectNone() - return time it took
-*   - added vs_start and vs_extra
-*   - added update(cells) - updates only data in the grid (or cells)
-*   - add to docs onColumnDragStart, onColumnDragEnd
-*   - onSelect and onSelect should fire 1 time for selects with shift or selectAll(), selectNone()
-*   - record.sayui.style[field_name]
-*   - use column field for style: { 1: 'color: red' }
-*   - added focus(), blur(), onFocus, onBlur
-*   - search.simple - if false, will not show up in simple search
-*   - search.operator - default operator to use with search field
-*   - search.operators - array of operators for the serach
-*   - search.hidden - could not be clearned by the user
-*   - search.value - only for hidden searches
-*   - if .search(val) - search all fields
-*   - refactor reorderRow (not finished)
-*   - return JSON can now have summary array
-*   - frozen columns
-*   - added selectionSave, selectionRestore - for internal use
-*   - added additional search filter options for int, float, date, time
-*   - added getLineHTML
-*   - added lineNumberWidth
-*   - add searches.style
-*   - getColumn without params returns fields of all columns
-*   - getSearch without params returns fields of all searches
-*   - added column.tooltip
-*   - added hasFocus, refactored sayutils.keyboard
-*   - do not clear selection when clicked and it was not in focus
-*   - added record.sayui.colspan
-*   - editable area extends with typing
-*   - removed onSubmit and onDeleted - now it uses onSave and onDelete
-*   - column.seachable - can be an object, which will create search
-*   - added null, not null filters
-*   - update(cells) - added argument cells
-*   - scrollIntoView(..., ..., instant) - added third argument
-*   - added onResizeDblClick
-*   - added onColumnDblClick
-*   - implemented showBubble
-*   - added show.searchAll
-*   - added saygrid.operators
-*   - added saygrid.operatorsMap
-*   - move events into prototype
-*   - move rec.summary, rec.style, rec.editable -> into rec.sayui.summary, rec.sayui.style, rec.sayui.editable
-*   - record: {
-        recid
-        field1
-        ...
-        fieldN
-        sayui: {
-            colspan: { field: 5, ...}
-            editable: true/false
-            changes: {
-                field: chagned_value,
-                ....
-            },
-            children: [
-                // similar to records array
-                // can have sub children
-            ]
-            parent_recid: (internally set, id of the parent record, when children are copied to records array)
-            summary: true/false
-            style: 'string' - for entire row OR { field: 'string', ...} - per field
-            class: 'string' - for entire row OR { field: 'string', ...} - per field
-        }
-    }
-*   - added this.show.toolbarInput
-*   - disableCVS
-*   - grid.message
-*   - added noReset option to localSort()
-*   - onColumnSelect
-*   - need to update PHP example
-*   - added scrollToColumn(field)
-*   - textSearch: 'begins' (default), 'contains', 'is', ...
-*   - added refreshBody
-*   - added response.total = -1 (or not present) to indicate that number of records is unknown
-*   - message(.., callBack) - added callBack
-*   - grid.msgEmpty
-*   - field.render(..., data) -- added last argument which is what grid thinks should be there
-*   - onSearchOpen (onSearch will have mutli and reset flags)
-*   - added httpHeaders
-*   - col.editable can be a function which will be called with the same args as col.render()
-*   - getCellEditable(index, col_ind) -- return an 'editable' descriptor if cell is really editable
-*   - added stateId
-*   - rec.sayui.class (and rec.sayui.class { fname: '...' })
-*   - columnTooltip
-*   - expendable grids are still working
-*   - added search.type = 'color'
-*
-************************************************************************/
 
 (function ($) {
     var saygrid = function(options) {
@@ -10401,20 +10264,6 @@ sayutils.event = {
     sayobj.grid = saygrid;
 })(jQuery);
 
-/************************************************************************
-*   Library: Web 2.0 UI for jQuery (using prototypical inheritance)
-*   - Following objects defined
-*        - saylayout        - layout widget
-*        - $().saylayout    - jQuery wrapper
-*   - Dependencies: jQuery, sayutils, saytoolbar, saytabs
-*
-* == NICE TO HAVE ==
-*   - onResize for the panel
-*   - add more panel title positions (left=rotated, right=rotated, bottom)
-*   - bug: when you assign content before previous transition completed.
-*
-************************************************************************/
-
 (function ($) {
     var saylayout = function (options) {
         this.box     = null;     // DOM Element that holds the element
@@ -11537,19 +11386,6 @@ sayutils.event = {
     $.extend(saylayout.prototype, sayutils.event);
     sayobj.layout = saylayout;
 })(jQuery);
-
-/************************************************************************
-*   Library: Web 2.0 UI for jQuery (using prototypical inheritance)
-*   - Following objects defined
-*        - saypopup      - popup widget
-*        - $().saypopup  - jQuery wrapper
-*   - Dependencies: jQuery, sayutils
-*
-* == NICE TO HAVE ==
-*   - hide overlay on esc
-*   - make popup width/height in %
-*
-************************************************************************/
 
 var saypopup = {};
 
@@ -13190,18 +13026,6 @@ var sayprompt = function (label, title, callBack) {
     sayobj.tabs = saytabs;
 })(jQuery);
 
-/************************************************************************
-*   Library: Web 2.0 UI for jQuery (using prototypical inheritance)
-*   - Following objects defined
-*        - saytoolbar        - toolbar widget
-*        - $().saytoolbar    - jQuery wrapper
-*   - Dependencies: jQuery, sayutils, sayfield
-*
-* == NICE TO HAVE ==
-*   - vertical toolbar
-*
-************************************************************************/
-
 (function ($) {
     var saytoolbar = function (options) {
         this.box       = null;      // DOM Element that holds the element
@@ -13968,22 +13792,6 @@ var sayprompt = function (label, title, callBack) {
     $.extend(saytoolbar.prototype, sayutils.event);
     sayobj.toolbar = saytoolbar;
 })(jQuery);
-
-/************************************************************************
-*   Library: Web 2.0 UI for jQuery (using prototypical inheritance)
-*   - Following objects defined
-*        - saysidebar        - sidebar widget
-*        - $().saysidebar    - jQuery wrapper
-*   - Dependencies: jQuery, sayutils
-*
-* == NICE TO HAVE ==
-*   - add find() method to find nodes by a specific criteria (I want all nodes for exampe)
-*   - dbl click should be like it is in grid (with timer not HTML dbl click event)
-*   - reorder with dgrag and drop
-*   - node.style is misleading - should be there to apply color for example
-*   - add multiselect
-*
-************************************************************************/
 
 (function ($) {
     var saysidebar = function (options) {
@@ -14922,31 +14730,6 @@ var sayprompt = function (label, title, callBack) {
     $.extend(saysidebar.prototype, sayutils.event);
     sayobj.sidebar = saysidebar;
 })(jQuery);
-
-/************************************************************************
-*   Library: Web 2.0 UI for jQuery (using prototypical inheritance)
-*   - Following objects defined
-*        - sayfield        - various field controls
-*        - $().sayfield    - jQuery wrapper
-*   - Dependencies: jQuery, sayutils
-*
-* == NICE TO HAVE ==
-*   - upload (regular files)
-*   - BUG with prefix/postfix and arrows (test in different contexts)
-*   - multiple date selection
-*   - month selection, year selections
-*   - arrows no longer work (for int)
-*   - form to support custom types
-*   - rewrite suffix and prefix positioning with translateY()
-*   - prefix and suffix are slow (100ms or so)
-*   - MultiSelect - Allow Copy/Paste for single and multi values
-*   - add routeData to list/enum
-*   - for type: list -> read value from attr('value')
-*   - ENUM, LIST: should have same as grid (limit, offset, search, sort)
-*   - ENUM, LIST: should support wild chars
-*   - add selection of predefined times (used for appointments)
-*
-************************************************************************/
 
 (function ($) {
 
@@ -17603,41 +17386,6 @@ var sayprompt = function (label, title, callBack) {
     sayobj.field = sayfield;
 
 }) (jQuery);
-
-/************************************************************************
-*   Library: Web 2.0 UI for jQuery (using prototypical inheritance)
-*   - Following objects defined
-*        - sayform      - form widget
-*        - $().sayform  - jQuery wrapper
-*   - Dependencies: jQuery, sayutils, sayfields, saytabs, saytoolbar
-*
-* == NICE TO HAVE ==
-*   - include delta on save
-*   - form should read <select> <options> into items
-*   - two way data bindings
-*   - verify validation of fields
-*   - added getChanges() - not complete
-*   - nested record object
-*   - formHTML --> template
-*
-* == 1.5 changes
-*   - $('#form').sayform() - if called w/o argument then it returns form object
-*   - added onProgress
-*   - added field.html.style (for the whole field)
-*   - added enable/disable, show/hide
-*   - added field.disabled, field.hidden
-*   - when field is blank, set record.field = null
-*   - action: { caption: 'Limpiar', style: '', class: '', onClick: function () {} }
-*   - added ability to generate radio and select html in generateHTML()
-*   - refresh(field) - would refresh only one field
-*   - form.message
-*   - added field.html.column
-*   - added field types html, empty, custom
-*   - httpHeaders
-*   - method
-*
-************************************************************************/
-
 
 (function ($) {
     var sayform = function(options) {
